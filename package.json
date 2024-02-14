@@ -1,0 +1,16 @@
+{
+  "name": "task-todo-list",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "1.70.0",
+    "vite": "^5.1.0"
+  }
+}
