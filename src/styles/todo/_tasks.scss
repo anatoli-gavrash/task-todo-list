@@ -1,0 +1,175 @@
+.todo-tasks {
+  list-style: none;
+
+  &__task {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    column-gap: 7px;
+    border-radius: 4px;
+    background-color: $color-white;
+    box-shadow: 0 5px 4px -6px $color-cod-gray;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+    &.done {
+      background-color: unset;
+      box-shadow: unset;
+    }
+
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+
+    &-checkbox {
+      appearance: none;
+      position: relative;
+      display: inline-block;
+      flex-shrink: 0;
+      margin-right: 5px;
+      width: 20px;
+      height: 20px;
+      border: 1px solid $color-spring-rain;
+      border-radius: 4px;
+      background-color: unset;
+      transition: box-shadow 0.2s ease-in-out;
+
+      &:hover {
+        box-shadow: 3px 3px 5px -3px $color-spring-rain;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+
+      &:checked {
+        background-color: $color-spring-rain;
+
+        &::after {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 5px;
+          height: 10px;
+          top: 50%;
+          left: 50%;
+          border: none;
+          border-right: 2px solid $color-white;
+          border-bottom: 2px solid $color-white;
+          transform-origin: top;
+          transform: rotate(43deg) translate(-50%, -50%);
+        }
+      }
+    }
+
+    &-text {
+      display: flex;
+      column-gap: 5px;
+      align-items: center;
+
+      &-label {
+        overflow: hidden;
+        display: -webkit-box;
+        word-break: break-word;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 5;
+      }
+
+      &-button {
+        display: flex;
+        width: 20px;
+        height: 20px;
+        padding: 3px;
+        flex-shrink: 0;
+        place-items: center;
+        border: none;
+        background-color: unset;
+        fill: $color-spring-rain;
+        transition: fill 0.2s ease-in-out;
+
+        &:hover {
+          fill: $color-cod-gray;
+        }
+
+        &:active {
+          transform: scale(0.90);
+        }
+
+        &-icon {
+          pointer-events: none;
+        }
+      }
+    }
+
+    &-edit {
+      display: none;
+      column-gap: 7px;
+      align-items: center;
+
+      &-button {
+        display: flex;
+        width: 20px;
+        height: 20px;
+        border: none;
+        background-color: unset;
+
+        &:active {
+          transform: scale(0.90);
+        }
+
+        &::before {
+          content: '';
+          width: 43%;
+          height: 86%;
+          flex-shrink: 0;
+          border: none;
+          border-right: 2px solid $color-spring-rain;
+          border-bottom: 2px solid $color-spring-rain;
+          transform-origin: top;
+          transform: rotate(43deg) translate(83%, -35%);
+          transition: border 0.2s ease-in-out;
+        }
+
+        &:hover::before {
+          border-right: 2px solid $color-cod-gray;
+          border-bottom: 2px solid $color-cod-gray;
+        }
+      }
+    }
+
+    &.done .todo-tasks__task-text {
+      text-decoration: line-through;
+      color: $color-dusty-gray;
+    }
+
+    &.done .todo-tasks__task-edit {
+      text-decoration: line-through;
+    }
+
+    &.edit .todo-tasks__task-text {
+      display: none;
+    }
+
+    &.edit .todo-tasks__task-edit {
+      display: flex;
+    }
+
+    &-button-delete {
+      width: 16px;
+      height: 16px;
+      margin-left: auto;
+      flex-shrink: 0;
+      border: none;
+      font-weight: 600;
+      background-color: unset;
+      @include buttonGradient($color-spring-rain, 46%, 54%);
+
+      &:active {
+        transform: scale(0.90);
+      }
+
+      &:hover {
+        @include buttonGradient($color-flamingo, 46%, 54%);
+      }
+    }
+  }
+}

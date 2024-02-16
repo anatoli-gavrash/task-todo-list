@@ -1,0 +1,157 @@
+.todo {
+  &__title {
+    margin-left: 10px;
+    color: $color-white;
+    text-transform: uppercase;
+  }
+
+  &__filter {
+    display: flex;
+    column-gap: 10px;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background-color: $color-athens-gray;
+
+    &-button {
+      padding: 5px;
+      min-width: 75px;
+      border: none;
+      border-bottom: 2px solid transparent;
+      font-weight: 500;
+      background-color: unset;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: $color-flamingo;
+      }
+
+      &:active {
+        transform: translateY(2%);
+      }
+
+      &.active {
+        border-bottom-color: $color-spring-rain;
+      }
+    }
+  }
+
+  &__add {
+    margin-bottom: 5px;
+
+    &-form {
+      overflow: hidden;
+      display: flex;
+      max-height: 0;
+      row-gap: 15px;
+      border-radius: 0 6px 6px;
+      flex-direction: column;
+      background-color: $color-athens-gray;
+      transition: max-height 0.3s ease-in-out;
+
+      &-input {
+        width: auto;
+        margin: 15px 15px 0;
+      }
+
+      &-list {
+        overflow: auto;
+        margin: 0 15px;
+        max-height: 900px;
+        list-style: none;
+
+        &-item {
+          display: flex;
+          align-items: center;
+          padding: 10px;
+          column-gap: 5px;
+          border-radius: 4px;
+          background-color: $color-white;
+          box-shadow: 0 5px 4px -6px $color-cod-gray;
+
+          &:not(:first-child) {
+            margin-top: 8px;
+          }
+
+          &-button {
+            width: 16px;
+            height: 16px;
+            margin-left: auto;
+            flex-shrink: 0;
+            border: none;
+            font-weight: 600;
+            background-color: unset;
+            @include buttonGradient($color-spring-rain, 46%, 54%);
+      
+            &:active {
+              transform: scale(0.90);
+            }
+      
+            &:hover {
+              @include buttonGradient($color-flamingo, 46%, 54%);
+            }
+          }
+        }
+      }
+
+      &-buttons {
+        display: flex;
+        margin: 0 15px 15px;
+        gap: 15px;
+        justify-content: space-between;
+      }
+    }
+
+    &.open &-button {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      color: $color-spring-rain;
+      background-color: $color-athens-gray;
+      box-shadow: none;
+
+      &:hover {
+        color: $color-cod-gray;
+      }
+
+      &:active {
+        transform: translateY(2%);
+      }
+
+      &::before {
+        background-image:
+          linear-gradient(transparent 44%, $color-spring-rain 44%, $color-spring-rain 56%, transparent 56%),
+          linear-gradient(90deg, transparent 44%, $color-spring-rain 44%, $color-spring-rain 56%, transparent 56%);
+      }
+    }
+
+    &.open &-form {
+      max-height: 1000px;
+    }
+  }
+
+  &__list {
+    list-style: none;
+
+    &-item {
+      padding: 15px;
+      border-radius: 6px;
+      background-color: $color-athens-gray;
+
+      &:not(:first-child) {
+        margin-top: 7px;
+      }
+
+      & > *:not(:first-child) {
+        margin-top: 10px;
+      }
+
+      @import "./head";
+      
+      @import "./tasks";
+
+      &.disable {
+        display: none;
+      }
+    }
+  }
+}
