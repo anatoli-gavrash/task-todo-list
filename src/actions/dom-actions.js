@@ -7,7 +7,7 @@ import {
   handleAddTask
 } from "../listeners/handlers";
 import { randomInteger } from "../utils/utils";
-
+// Иконка с карандашом
 const iconPencil = (className) => {
   return `
     <svg class="${className}" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 612.032 612.032">
@@ -17,17 +17,8 @@ const iconPencil = (className) => {
     </svg>
   `;
 };
-
-const createElement = (tag, className, innerText = '', htmlFor = '') => {
-  const element = document.createElement(tag);
-  element.className = className;
-  element.innerText = innerText;
-
-  if (tag === 'label') element.setAttribute('for', htmlFor);
-  
-  return element;
-};
-
+// Функциия для динамического добавления обработчика по классу элеменита
+// Выглядит ужасно, не осталось времени на её оптимизацию
 const addHandler = (className) => {
   switch (className) {
     case "todo-head__text-button":
@@ -56,7 +47,17 @@ const addHandler = (className) => {
       break;
   }
 };
+// Создание элемента для добавления в список
+const createElement = (tag, className, innerText = '', htmlFor = '') => {
+  const element = document.createElement(tag);
+  element.className = className;
+  element.innerText = innerText;
 
+  if (tag === 'label') element.setAttribute('for', htmlFor);
+  
+  return element;
+};
+// Создание кнопки для добавления в список
 const createButton = (className, type, innerText = '', innerHTML = '') => {
   const button = document.createElement('button');
   button.className = className;
@@ -67,7 +68,7 @@ const createButton = (className, type, innerText = '', innerHTML = '') => {
 
   return button;
 };
-
+// Создание поля для добавления в список
 const createInput = (className, type, name, value, id) => {
   const input = document.createElement('input');
   input.className = className;
@@ -86,7 +87,7 @@ const createInput = (className, type, name, value, id) => {
 
   return input;
 };
-
+// Сборка задачи из элементов
 const createTodoTask = (titleId, {id, task, isDone}) => {
   const taskElement = createElement('li', `todo-tasks__task${isDone ? ' done' : ''}`);
   const taskInput = createInput('todo-tasks__task-checkbox', 'checkbox', `done-${titleId}-${id}`, isDone, `id-done-${titleId}-${id}`);
@@ -109,7 +110,7 @@ const createTodoTask = (titleId, {id, task, isDone}) => {
 
   return taskElement;
 };
-
+// Сборка списка задач из элементов
 const createTodoItem = ({id, title, tasks}) => {
   const todoItem = createElement('li', 'todo__list-item');
   const todoHead = createElement('div', 'todo__list-item-head todo-head');
@@ -137,26 +138,31 @@ const createTodoItem = ({id, title, tasks}) => {
 
   return todoItem;
 };
-
+// Добавление готового списка задач в корневой элемент
 export const addTodoItem = (todoData) => {
   const todoList = document.querySelector('.todo__list');
   todoList.prepend(createTodoItem(todoData));
 };
-
+// Добавление задачи в указанный список
 export const addTask = (parent) => {
+  // Получение id заголовка. Требуется для формирования атрибутов "name" и "id" у задачи
   const titleId = parent.querySelector('[name^="title-"]').name.split('-').pop();
   const tasks = parent.querySelector('.todo__list-item-tasks');
+  // Случайный id для задачи
   const id = randomInteger();
-
+  // Создание задачи
   const task = createTodoTask(titleId, {id, task: '', isDone: false});
+  // Класс для активации поля редактирования
   task.classList.add('edit');
 
   tasks.append(task);
 };
-
+// Добавление задачи в форму создания нового списка
 export const addTaskInNewTodo = () => {
   const newTodoTasks = document.querySelector('.todo__add-form-list');
   const task = createElement('li', 'todo__add-form-list-item');
+  // В атрибут "name" добавляются временные данные.
+  // Для уникальности имени используется длина массива потомков родителя
   const taskInput = createInput('todo__add-form-list-item-input input', 'text', `task-${newTodoTasks.children.length}`, '');
   const taskButton = createButton('todo__add-form-list-item-button', 'button');
   
@@ -166,14 +172,18 @@ export const addTaskInNewTodo = () => {
   task.append(taskButton);
   newTodoTasks.append(task);
 };
-
+// Фильтрация списка задач
 export const filterTodos = (filter = 'all') => {
+  // Коллекция из списков задач
   const todos = document.querySelectorAll('.todo__list-item');
 
   for (const todo of todos) {
+    // Список задач
     const tasks = todo.querySelectorAll('.todo-tasks__task');
+    // Если в списке есть задача без "done" класса
     const isTodoDone = ![...tasks].filter((task) => !task.classList.contains('done')).length;
 
+    // Добавление класса "disable" для не прошедших проверку списков
     if (filter === 'done') {
       isTodoDone ? todo.classList.remove('disable') : todo.classList.add('disable');
     } else if (filter === 'active') {
@@ -183,7 +193,7 @@ export const filterTodos = (filter = 'all') => {
     }
   }
 };
-
+// Удаление класса из списка элементов
 export const removeClasses = (nodeList, className) => {
   for (const node of nodeList) {
     node.classList.remove(className);
