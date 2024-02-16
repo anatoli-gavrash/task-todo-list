@@ -1,0 +1,5 @@
+@mixin buttonGradient($color, $min, $max) {
+  background-image:
+    linear-gradient(-45deg, transparent $min, $color $min, $color $max, transparent $max),
+    linear-gradient(45deg, transparent $min, $color $min, $color $max, transparent $max);
+}

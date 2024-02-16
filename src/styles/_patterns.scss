@@ -1,0 +1,93 @@
+.button {
+  display: flex;
+  height: fit-content;
+  padding: 8px 15px;
+  column-gap: 10px;
+  align-items: center;
+  border: 1px solid $color-spring-rain;
+  border-radius: 4px;
+  font-weight: 500;
+  color: $color-spring-rain;
+  transition: color 0.2s ease-in-out, border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    color: $color-cod-gray;
+    box-shadow: 3px 3px 5px -3px $color-spring-rain;
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}
+
+.button-alt {
+  @extend .button;
+
+  color: $color-white;
+  background-color: $color-spring-rain;
+}
+
+.button-add {
+  @extend .button;
+
+  &::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    background-image:
+      linear-gradient(transparent 44%, $color-spring-rain 44%, $color-spring-rain 56%, transparent 56%),
+      linear-gradient(90deg, transparent 44%, $color-spring-rain 44%, $color-spring-rain 56%, transparent 56%);
+  }
+}
+
+.button-add-alt {
+  @extend .button-add;
+
+  border: 1px solid $color-athens-gray;
+  color: $color-white;
+  background-color: unset;
+
+  &::before {
+    background-image:
+      linear-gradient(transparent 44%, $color-white 44%, $color-white 56%, transparent 56%),
+      linear-gradient(90deg, transparent 44%, $color-white 44%, $color-white 56%, transparent 56%);
+  }
+}
+
+.button-delete {
+  @extend .button;
+
+  color: $color-flamingo;
+
+  &:hover {
+    color: $color-flamingo;
+    border-color: $color-flamingo;
+  }
+}
+
+.input {
+  width: 100%;
+  border: none;
+  background-color: unset;
+  background-image: linear-gradient($color-spring-rain, $color-spring-rain);
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+
+  &::placeholder {
+    color: $color-spring-rain;
+  }
+
+  &::selection {
+    color: $color-white;
+    background-color: $color-spring-rain;
+  }
+}
+
+.input-title {
+  @extend .input;
+
+  font-size: 1.5rem;
+  font-weight: 700;
+}

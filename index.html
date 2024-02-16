@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
   </head>
   <body>
@@ -10,6 +10,23 @@
     <main>
       <section class="todo">
         <h1 class="todo__title">To-Do List</h1>
+        <div class="todo__filter">
+          <button class="todo__filter-button active" type="button" data-filter="all">All</button>
+          <button class="todo__filter-button" type="button" data-filter="active">Active</button>
+          <button class="todo__filter-button" type="button" data-filter="done">Done</button>
+        </div>
+        <div class="todo__add">
+          <button class="todo__add-button button-add-alt">Add to-do</button>
+          <form class="todo__add-form" inert>
+            <input class="todo__add-form-input input-title" type="text" name="title" placeholder="Title" required>
+            <ul class="todo__add-form-list"></ul>
+            <div class="todo__add-form-buttons">
+              <button class="todo__add-form-buttons-button button-add" type="button">Add task</button>
+              <button class="todo__add-form-buttons-button button-alt" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <ul class="todo__list"></ul>
       </section>
     </main>
     <footer></footer>
