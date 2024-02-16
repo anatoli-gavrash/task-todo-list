@@ -1,6 +1,8 @@
 # task-todo-list
 Technical task for Sea Side Digital company
 
+Деплой - https://task-todo-list-navite.netlify.app/
+
 ## Создание простого веб-приложения для управления задачами
 
 ### Описание:
