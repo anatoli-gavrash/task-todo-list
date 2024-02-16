@@ -4,3 +4,20 @@ export const randomInteger = (min = 0, max = 1000000000) => {
 
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+export const createNewTodo = (data) => {
+  const tasks = Object.entries(data)
+    .filter(([key]) => key
+    .includes('task'))
+    .map(([, value]) => ({
+      id: randomInteger(),
+      task: value,
+      isDone: false
+    }));
+  
+  return {
+    id: randomInteger(),
+    title: data.title,
+    tasks
+  };
+};
